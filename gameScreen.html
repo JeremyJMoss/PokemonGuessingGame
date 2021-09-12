@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/style.css" />
+    <title>Pokemon Guessing Game</title>
+  </head>
+  <body>
+    <div class="backgroundPopup"></div>
+    <div class="loadPage hide"></div>
+    <div class="pokemonInfo">
+      <button id="closeBtn">X</button>
+      <div class="avPokemon">
+        <div id="pokemonList"></div>
+      </div>
+    </div>
+    <div class="popUpWindow">
+      <h2>Congratulations!</h2>
+      <div class="pokemonImageContainer"></div>
+      <p>You guessed right!<br />Press reset to start game again</p>
+      <div class="resetBtn">Reset</div>
+    </div>
+    <div class="gameContainer">
+      <div class="gameHeading">
+        <img src="images/pokemonHeader.png" alt="" />
+      </div>
+      <section class="guessingSide">
+        <button id="hardBtn" class="modeBtn">Hard Mode</button>
+        <button id="normalBtn" class="modeBtn hide">easy mode</button>
+        <div class="canYouGuess">
+          <div class="guessingField">
+            <h1>Can You Guess My Pokémon</h1>
+            <h3 id="questionMark">?</h3>
+            <form>
+              <input
+                type="text"
+                placeholder="Write Pokémon name here"
+                id="nameInput"
+                onfocus="this.placeholder = ''"
+                onblur="this.placeholder = 'Write Pokemon name here'"
+                autocomplete="off"
+              />
+              <button type="submit" id="check">Check</button>
+            </form>
+            <p>Select button to see list of available pokemon</p>
+            <button id="informationButton">?</button>
+            <div class="scoreSheet">
+              <div class="score">
+                <p>Score</p>
+                <p></p>
+              </div>
+
+              <div class="highScore">
+                <p>Highscore</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="infoSide"></section>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="main.js"></script>
+  </body>
+</html>

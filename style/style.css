@@ -1,0 +1,396 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primaryRed: #ff0000;
+  --secondaryRed: #cc0000;
+  --primaryBlue: #3b4cca;
+  --primaryYellow: #ffde00;
+  --secondaryYellow: #b3a125;
+}
+
+body {
+  position: relative;
+}
+
+.backgroundPopup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  display: none;
+}
+
+.loadPage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background-color: #777;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+.loadPage::after {
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 10px #cfd0d1;
+  border-bottom-color: #1c87c9;
+  border-radius: 50%;
+  content: "";
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+}
+
+.popUpWindow {
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
+  border-radius: 50px;
+  background-color: #ddd;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 20px;
+}
+
+.popUpWindow h2 {
+  font-size: min(5vw, 30px);
+  font-family: "Roboto", "sans-serif";
+  color: var(--primaryBlue);
+  font-weight: 900;
+}
+
+.popUpWindow p {
+  font-family: "Roboto", "sans-serif";
+  font-size: min(3vw, 1.1rem);
+  font-weight: 900;
+  color: var(--secondaryRed);
+}
+
+.resetBtn {
+  width: 120px;
+  padding: 7px;
+  border: 1px solid #333;
+  border-radius: 20px;
+  font-weight: 900;
+  background-color: var(--secondaryYellow);
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #111;
+  font-family: "Roboto", "sans-serif";
+  cursor: pointer;
+}
+
+.gameContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primaryYellow);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.gameHeading {
+  position: absolute;
+  width: 200px;
+  top: 0vh;
+  z-index: 1;
+}
+
+.gameHeading img {
+  width: 100%;
+}
+
+.guessingSide {
+  width: 45%;
+  height: 90%;
+  background-color: var(--primaryBlue);
+  box-shadow: 0px 0px 7px 7px #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.infoSide {
+  width: 45%;
+  height: 90%;
+  background-color: var(--primaryRed);
+  box-shadow: 0px 0px 7px 7px #333;
+  padding: 40px 20px 0 20px;
+  overflow-y: auto;
+}
+
+.canYouGuess {
+  width: 70%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.canYouGuess h1 {
+  font-family: "Roboto", "sans-serif";
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+  color: #ddd;
+}
+
+#questionMark {
+  font-family: "Poppins", "sans-serif";
+  font-size: 7rem;
+  color: var(--primaryYellow);
+  text-shadow: 3px 3px 5px #222;
+}
+
+.canYouGuess form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#nameInput {
+  margin-bottom: 20px;
+  padding: 10px 0px;
+  border-radius: 20px;
+  border: 2px solid #444;
+  outline: none;
+  text-align: center;
+  font-size: 1rem;
+  font-family: "Roboto", "sans-serif";
+  min-width: 200px;
+  width: 80%;
+}
+
+#nameInput:focus,
+#nameInput:hover {
+  box-shadow: 0px 0px 8px 2px #444;
+}
+.canYouGuess form button {
+  border-radius: 20px;
+  padding: 5px 20px;
+  border: none;
+  font-family: "Roboto", "sans-serif";
+  background-color: var(--primaryYellow);
+  color: #000;
+  font-weight: 900;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transform: scale(1, 1);
+  transition: 100ms ease-in-out;
+}
+
+.canYouGuess form button:hover {
+  transform: scale(1.01, 1.01);
+  transform-origin: center;
+  box-shadow: 0px 0px 2px 1px var(--primaryYellow);
+  color: var(--secondaryRed);
+}
+
+.canYouGuess p {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.pokemonImage {
+  width: 120px;
+  height: 120px;
+}
+
+.pokemonImageContainer {
+  width: 120px;
+  height: 120px;
+}
+
+.createdDiv {
+  display: flex;
+  width: 100%;
+  height: 5%;
+  margin: 10px auto;
+  padding: 20px 10px;
+  align-items: center;
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+  color: var(--primaryBlue);
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: black solid 2px;
+  background-color: var(--primaryYellow);
+}
+
+.scoreSheet {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 40px;
+}
+
+.highScore p:first-child {
+  font-family: "Poppins", "sans-serif";
+  font-size: 1rem;
+  color: var(--primaryYellow);
+}
+
+.score p:first-child {
+  font-family: "Poppins", "sans-serif";
+  font-size: 1rem;
+  color: var(--primaryYellow);
+}
+
+.highScore p:last-child {
+  font-size: 2rem;
+}
+
+.score p:last-child {
+  font-size: 2rem;
+}
+
+.pokemonInfo {
+  position: absolute;
+  width: 35%;
+  height: 80%;
+  inset: 10% 8%;
+  background-color: #ddd;
+  z-index: 3;
+  display: none;
+}
+
+.pokemonInfo button {
+  float: right;
+  width: 25px;
+  height: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.avPokemon {
+  width: calc(100% - 35px);
+  height: 100%;
+  overflow-y: auto;
+  text-align: center;
+}
+
+#pokemonList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.createdListItem {
+  flex-basis: 100%;
+  font-size: 1.3rem;
+  margin: 10px;
+  text-transform: capitalize;
+  font-family: "Poppins", "sans-serif";
+  color: #333;
+}
+
+.avPokemon::-webkit-scrollbar {
+  width: 15px;
+}
+
+.avPokemon::-webkit-scrollbar-thumb {
+  background-color: var(--secondaryRed);
+  border-radius: 8px;
+}
+
+.avPokemon::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background-color: #ccc;
+}
+
+.guessingField p {
+  font-size: 1.2rem;
+}
+
+#informationButton {
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  text-align: center;
+  border: none;
+  box-shadow: 0 0 10px 1px #333;
+  font-size: 1.1rem;
+  font-family: "Roboto", "sans-serif";
+  font-weight: 900;
+  cursor: pointer;
+  transform: scale(1, 1);
+  transition: transform 150ms ease-in-out;
+}
+
+#informationButton:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: 0 0 10px 1px var(--primaryYellow);
+}
+
+.modeBtn {
+  position: absolute;
+  top: 1%;
+  left: 2%;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 15px;
+  outline: none;
+  box-shadow: 0 0 5px 1px #333;
+  width: 70px;
+  height: 35px;
+  font-family: "Roboto", "sans-serif";
+  font-weight: 900;
+  cursor: pointer;
+  transform: scale(1, 1);
+  transition: transform 100ms ease-in-out;
+}
+
+.modeBtn:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: 0 0 4px 2px #333;
+}
+
+#hardBtn {
+  color: var(--primaryYellow);
+  background-color: var(--secondaryRed);
+}
+
+#normalBtn {
+  background-color: var(--primaryYellow);
+  color: #000;
+}
+
+.hide {
+  display: none;
+}
