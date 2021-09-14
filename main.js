@@ -74,7 +74,6 @@ const getPokemon = function () {
   axios
     .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
     .then((response) => {
-      console.log(response.data);
       data = response.data;
     })
     .catch((err) => console.log("whoops something didn't work"));
