@@ -413,7 +413,11 @@ body {
   .infoSide {
     width: 90%;
     height: 45%;
-    padding: 10px 20px 0 20px;
+    padding: 10px 5px 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
   }
 
   #questionMark {
@@ -427,16 +431,19 @@ body {
   }
 
   .canYouGuess h1 {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
   }
 
   .createdDiv {
     display: flex;
-    width: 100%;
+    flex-basis: 48%;
+    width: auto;
     height: 5%;
-    margin: 10px auto;
-    padding: 20px 10px;
+    text-align: center;
+    padding: 20px 5px;
+    font-size: 0.7rem;
+    margin: 2px;
   }
 
   .gameHeading {
@@ -449,13 +456,16 @@ body {
     font-size: 0.65rem;
   }
 }
-@media screen and (max-height: 750px) {
+@media screen and (max-height: 700px) {
   .canYouGuess h1 {
     font-size: 1.3rem;
     margin-bottom: 5px;
     line-height: 1.7rem;
   }
 
+  .canYouGuess form button {
+    margin-bottom: 5px;
+  }
   .guessingField p {
     font-size: 1rem;
   }
@@ -498,5 +508,39 @@ body {
   .canYouGuess {
     width: 80%;
     height: 90%;
+  }
+
+  #questionMark {
+    display: none;
+  }
+
+  .createdDiv {
+    font-size: 0.9rem;
+  }
+
+  .scoreSheet {
+    margin-top: -2rem;
+    margin-bottom: -1rem;
+  }
+}
+@media screen and (max-height: 400px) {
+  .gameHeading {
+    width: 125px;
+  }
+
+  .modeBtn {
+    width: 50px;
+    height: 25px;
+    font-size: 0.65rem;
+  }
+
+  .createdDiv {
+    font-size: 0.7rem;
+    padding: 15px 5px;
+    margin: 5px auto;
+  }
+
+  .infoSide {
+    padding: 20px 15px 0 15px;
   }
 }
