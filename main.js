@@ -339,7 +339,7 @@ window.onresize = function () {
     document.documentElement.style.setProperty("overflow", "auto");
     metaViewport.setAttribute(
       "content",
-      `width=${initialWidth}, height=${initialHeight}, initial-scale=1.0, maximum-scale=1.0, user-scalable=0`
+      `width=${initialWidth}, height=${initialHeight}, initial-scale=1.0`
     );
   }
 };
