@@ -417,6 +417,10 @@ body {
     height: 45%;
   }
 
+  .guessingSide p {
+    font-size: 1rem;
+  }
+
   .infoSide {
     width: 90%;
     height: 45%;
@@ -431,10 +435,36 @@ body {
     display: none;
   }
 
+  #nameInput {
+    margin-bottom: 10px;
+    padding: 5px 0px;
+    font-size: 0.9rem;
+  }
+
   .scoreSheet {
     margin-top: -2.5rem;
     margin-bottom: -2rem;
     justify-content: space-between;
+  }
+
+  .highScore p:first-child {
+    font-family: "Poppins", "sans-serif";
+    font-size: 0.9rem;
+    color: var(--primaryYellow);
+  }
+
+  .score p:first-child {
+    font-family: "Poppins", "sans-serif";
+    font-size: 0.9rem;
+    color: var(--primaryYellow);
+  }
+
+  .highScore p:last-child {
+    font-size: 1.8rem;
+  }
+
+  .score p:last-child {
+    font-size: 1.8rem;
   }
 
   .canYouGuess h1 {
@@ -462,8 +492,20 @@ body {
     height: 25px;
     font-size: 0.65rem;
   }
+
+  .pokemonInfo {
+    width: 80%;
+  }
+
+  .avPokemon {
+    width: 90%;
+  }
 }
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 650px) {
+  .gameHeading {
+    width: 130px;
+  }
+
   .canYouGuess h1 {
     font-size: 1.3rem;
     margin-bottom: 5px;

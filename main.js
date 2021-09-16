@@ -1,3 +1,10 @@
+/*viewport adjustment for keyboard issue on andoid*/
+document.documentElement.style.setProperty("overflow", "auto");
+const metaViewport = document.querySelector("meta[name=viewport]");
+metaViewport.setAttribute(
+  "content",
+  "height=" + initialHeight + "px, width=device-width, inital-scale=1.0"
+);
 /*storing data recieved from api in data*/
 let data;
 /*generates a random number based on range given*/
@@ -134,7 +141,7 @@ const loadPage = function () {
   load.classList.toggle("hide");
   setTimeout(function () {
     load.classList.toggle("hide");
-  }, 1500);
+  }, 2000);
 };
 /*creating list items to add to unordered list dynamically*/
 const createListItems = function () {
@@ -198,7 +205,7 @@ const getInfo = function () {
       pokemon.moves.push(data.moves[i].move.name);
     }
     createDiv("primary type", pokemon.type[0]);
-  }, 1500);
+  }, 2000);
 };
 
 /*creating a function to attach to event listener for checkBtn click*/
