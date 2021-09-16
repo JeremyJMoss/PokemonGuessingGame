@@ -331,15 +331,15 @@ window.onresize = function () {
       `width=${initialWidth}, height=${initialHeight}, initial-scale=1.0, maximum-scale=1.0, user-scalable=0`
     );
   } else if (
-    (window.innerHeight < initialHeight && window.innerWidth > initialWidth) ||
-    (window.innerHeight > initialHeight && window.innerWidth < initialWidth)
+    window.innerHeight < initialHeight &&
+    window.innerWidth > initialWidth
   ) {
     initialHeight = window.innerHeight;
     initialWidth = window.innerWidth;
-    document.documentElement.style.setProperty("overflow", "none");
+    document.documentElement.style.setProperty("overflow", "auto");
     metaViewport.setAttribute(
       "content",
-      `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1.0`
+      `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1.0 maximum-scale=1.0, user-scalable=0`
     );
   }
 };
