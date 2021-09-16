@@ -319,7 +319,7 @@ window.onresize = function () {
     document.documentElement.style.setProperty("overflow", "auto");
     metaViewport.setAttribute(
       "content",
-      "height=" + initialHeight + "px, width=device.width, initial-scale=1.0"
+      `height=${initialHeight}px, width=${initialWidth}, initial-scale=1.0 maximum-scale=1.0, user-scalable=0`
     );
   } else if (
     window.innerHeight === initialHeight &&
@@ -334,7 +334,7 @@ window.onresize = function () {
     window.innerHeight < initialHeight &&
     window.innerWidth > initialWidth
   ) {
-    document.documentElement.style.setProperty("overflow", "hidden");
+    document.documentElement.style.setProperty("overflow", "auto");
     metaViewport.setAttribute(
       "content",
       `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1.0, maximum-scale=1.0, user-scalable=0`
