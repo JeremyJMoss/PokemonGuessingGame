@@ -57,6 +57,7 @@ const startState = function () {
   pokemon.type = [];
   pokemon.abilities = [];
   pokemon.moves = [];
+  list.innerHTML = "";
   getPokemon();
   getInfo();
   if (highscore < score) {
@@ -263,7 +264,7 @@ const getInput = function (ev) {
             counter++;
           }
         case 8:
-          createDiv("ends with", pokemon.name.charAt(-1));
+          createDiv("ends with", pokemon.name.charAt(pokemon.name.length - 1));
           break;
         case 9:
           createDiv("weight", `${pokemon.weight} Kg`);
