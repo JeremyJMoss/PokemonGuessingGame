@@ -1,7 +1,7 @@
 /*viewport adjustment for keyboard issue on andoid*/
 
-const initialHeight = window.innerHeight;
-const initialWidth = window.innerWidth;
+let initialHeight = window.innerHeight;
+let initialWidth = window.innerWidth;
 const metaViewport = document.querySelector("meta[name=viewport]");
 
 /*storing data recieved from api in data*/
@@ -319,27 +319,18 @@ window.onresize = function () {
     document.documentElement.style.setProperty("overflow", "auto");
     metaViewport.setAttribute(
       "content",
-      `height=${initialHeight}px, width=${initialWidth}px, initial-scale=1.0 maximum-scale=1.0, user-scalable=0`
+      `height=${initialHeight}, width=${initialWidth}, initial-scale=1.0 maximum-scale=1.0, user-scalable=0`
     );
   } else if (
-    window.innerHeight === initialHeight &&
-    window.innerWidth === initialWidth
-  ) {
-    document.documentElement.style.setProperty("overflow", "hidden");
-    metaViewport.setAttribute(
-      "content",
-      `width=${initialWidth}, height=${initialHeight}, initial-scale=1.0, maximum-scale=1.0, user-scalable=0`
-    );
-  } else if (
-    window.innerHeight < initialHeight &&
-    window.innerWidth > initialWidth
+    (window.innerHeight < initialHeight && window.innerWidth > initialWidth) ||
+    (window.innerHeight > initialHeight && window.innerWidth < initialWidth)
   ) {
     initialHeight = window.innerHeight;
     initialWidth = window.innerWidth;
     document.documentElement.style.setProperty("overflow", "auto");
     metaViewport.setAttribute(
       "content",
-      `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1.0 maximum-scale=1.0, user-scalable=0`
+      `width=${initialWidth}, height=${initialHeight}, initial-scale=1.0, maximum-scale=1.0 user-scalable=0`
     );
   }
 };
