@@ -336,10 +336,10 @@ window.onresize = function () {
   ) {
     initialHeight = window.innerHeight;
     initialWidth = window.innerWidth;
-    document.documentElement.style.setProperty("overflow", "auto");
+    document.documentElement.style.setProperty("overflow", "none");
     metaViewport.setAttribute(
       "content",
-      `width=${initialWidth}, height=${initialHeight}, initial-scale=1.0`
+      `width=${window.innerWidth}, height=${window.innerHeight}, initial-scale=1.0`
     );
   }
 };
