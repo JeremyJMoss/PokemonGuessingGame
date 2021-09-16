@@ -1,10 +1,9 @@
 /*viewport adjustment for keyboard issue on andoid*/
-document.documentElement.style.setProperty("overflow", "auto");
+
+const initialHeight = window.innerHeight;
+const initialWidth = window.innerWidth;
 const metaViewport = document.querySelector("meta[name=viewport]");
-metaViewport.setAttribute(
-  "content",
-  "height=" + window.innerHeight + "px, width=device-width, inital-scale=1.0"
-);
+
 /*storing data recieved from api in data*/
 let data;
 /*generates a random number based on range given*/
@@ -312,3 +311,33 @@ closeBtn.addEventListener("click", function () {
 });
 hardBtn.addEventListener("click", modeSelect);
 normalBtn.addEventListener("click", modeSelect);
+window.onresize = function () {
+  if (
+    window.innerHeight < initialHeight &&
+    window.innerWidth === initialWidth
+  ) {
+    document.documentElement.style.setProperty("overflow", "auto");
+    metaViewport.setAttribute(
+      "content",
+      "height=" + initialHeight + "px, width=device.width, initial-scale=1.0"
+    );
+  } else if (
+    window.innerHeight === initialHeight &&
+    window.innerWidth === initialWidth
+  ) {
+    document.documentElement.style.setProperty("overflow", "hidden");
+    metaViewport.setAttribute(
+      "content",
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    );
+  } else if (
+    window.innerHeight < initialHeight &&
+    window.innerWidth > initialWidth
+  ) {
+    document.documentElement.style.setProperty("overflow", "hidden");
+    metaViewport.setAttribute(
+      "content",
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    );
+  }
+};
