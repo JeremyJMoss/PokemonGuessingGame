@@ -3,7 +3,7 @@ document.documentElement.style.setProperty("overflow", "auto");
 const metaViewport = document.querySelector("meta[name=viewport]");
 metaViewport.setAttribute(
   "content",
-  "height=" + initialHeight + "px, width=device-width, inital-scale=1.0"
+  "height=" + window.innerHeight + "px, width=device-width, inital-scale=1.0"
 );
 /*storing data recieved from api in data*/
 let data;

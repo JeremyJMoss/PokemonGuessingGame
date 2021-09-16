@@ -77,8 +77,8 @@ body {
   position: absolute;
   border-radius: 50px;
   background-color: #ddd;
-  top: 50vh;
-  left: 50vw;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   display: none;
@@ -130,7 +130,7 @@ body {
 .gameHeading {
   position: absolute;
   width: 200px;
-  top: 0vh;
+  top: 0;
   z-index: 1;
 }
 
@@ -160,7 +160,7 @@ body {
 
 .canYouGuess {
   width: 70%;
-  height: 80%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -404,12 +404,7 @@ body {
 
 @media screen and (max-width: 580px) {
   .gameContainer {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
     flex-direction: column;
-    align-content: center;
-    justify-content: space-evenly;
   }
 
   .guessingSide {
