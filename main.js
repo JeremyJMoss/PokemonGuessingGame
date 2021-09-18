@@ -1,8 +1,4 @@
-/*viewport adjustment for keyboard issue on andoid*/
-
-let initialHeight = window.innerHeight;
-let initialWidth = window.innerWidth;
-const metaViewport = document.querySelector("meta[name=viewport]");
+"use strict";
 
 /*storing data recieved from api in data*/
 let data;
@@ -20,6 +16,9 @@ let sortedPokemon;
 let hardModeOn = false;
 let p;
 let selectedPokemon = [];
+/*viewport adjustment for keyboard issue on andoid*/
+let initialHeight = window.innerHeight;
+let initialWidth = window.innerWidth;
 
 /*collecting items for manipulation from Dom*/
 const checkBtn = document.getElementById("check");
@@ -38,6 +37,7 @@ const list = document.getElementById("pokemonList");
 const hardBtn = document.getElementById("hardBtn");
 const normalBtn = document.getElementById("normalBtn");
 const load = document.querySelector(".loadPage");
+const metaViewport = document.querySelector("meta[name=viewport]");
 
 /*creating empty object to fill with data from api*/
 let pokemon = {
@@ -69,11 +69,7 @@ const startState = function () {
   bodyBackground.style.display = "none";
   popup.style.display = "none";
   inputName.value = "";
-  let i = 0;
-  while ((i = infoSide.childNodes.length)) {
-    infoSide.firstChild.remove();
-    i++;
-  }
+  infoSide.innerHTML = "";
 };
 
 /*collecting data to store into pokemon object*/
@@ -127,11 +123,7 @@ const modeSelect = function () {
   highScoreEl.lastElementChild.innerText = highscore;
   scoreEl.lastElementChild.innerText = score;
   inputName.value = "";
-  let i = 0;
-  while ((i = infoSide.childNodes.length)) {
-    infoSide.firstChild.remove();
-    i++;
-  }
+  infoSide.innerHTML = "";
   hardBtn.classList.toggle("hide");
   normalBtn.classList.toggle("hide");
 };
@@ -304,14 +296,12 @@ getInfo();
 
 checkBtn.addEventListener("click", getInput);
 resetBtn.addEventListener("click", startState);
-infoBtn.addEventListener("click", function () {
-  infoCont.style.display = "block";
-});
-closeBtn.addEventListener("click", function () {
-  infoCont.style.display = "none";
-});
+infoBtn.addEventListener("click", () => (infoCont.style.display = "block"));
+closeBtn.addEventListener("click", () => (infoCont.style.display = "none"));
 hardBtn.addEventListener("click", modeSelect);
 normalBtn.addEventListener("click", modeSelect);
+
+/*adjusting for mobile view resize for landscape and input field where keyboard comes in and ruins your day*/
 window.onresize = function () {
   if (
     window.innerHeight < initialHeight &&
