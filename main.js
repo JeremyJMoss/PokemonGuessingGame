@@ -50,9 +50,9 @@ let pokemon = {
 const startState = function () {
   loadPage();
   document.querySelector(".pokemonImage").remove();
-  hardModeOn === false
-    ? (pokemonId = randomNumber(150))
-    : (pokemonId = randomNumber(251));
+  hardModeOn
+    ? (pokemonId = randomNumber(251))
+    : (pokemonId = randomNumber(150));
   counter = 1;
   pokemon.type = [];
   pokemon.abilities = [];
@@ -61,10 +61,9 @@ const startState = function () {
   getPokemon();
   getInfo();
   if (highscore < score) {
-    highscore = score;
-    highScoreEl.lastElementChild.innerText = highscore;
+    highScoreEl.lastElementChild.innerText = highscore = score;
   }
-  hardModeOn === false ? (score = 20) : (score = 40);
+  hardModeOn ? (score = 40) : (score = 20);
   scoreEl.lastElementChild.innerText = score;
   bodyBackground.style.display = "none";
   popup.style.display = "none";
@@ -104,12 +103,12 @@ const getAllPokemon = function () {
 /*hard mode function*/
 const modeSelect = function () {
   loadPage();
-  if (hardModeOn === false) {
-    hardModeOn = true;
-    pokemonId = randomNumber(251);
-  } else {
+  if (hardModeOn) {
     hardModeOn = false;
     pokemonId = randomNumber(151);
+  } else {
+    hardModeOn = true;
+    pokemonId = randomNumber(251);
   }
   counter = 1;
   pokemon.type = [];
@@ -137,18 +136,18 @@ const loadPage = function () {
 };
 /*creating list items to add to unordered list dynamically*/
 const createListItems = function () {
-  if (hardModeOn === false) {
-    for (let i = 0; i < 151; i++) {
-      p = document.createElement("p");
-      p.classList.add("createdListItem");
-      p.innerText = sortedPokemon[i];
-      list.appendChild(p);
-    }
-  } else {
+  if (hardModeOn) {
     for (let item of sortedPokemon) {
       p = document.createElement("p");
       p.classList.add("createdListItem");
       p.innerText = item;
+      list.appendChild(p);
+    }
+  } else {
+    for (let i = 0; i < 151; i++) {
+      p = document.createElement("p");
+      p.classList.add("createdListItem");
+      p.innerText = sortedPokemon[i];
       list.appendChild(p);
     }
   }
@@ -184,7 +183,7 @@ const getInfo = function () {
     pokemon.image = data.sprites.front_default;
     pokemon.weight = data.weight.toString().slice(0, -1);
     selectedPokemon = [];
-    hardModeOn === false ? selectedAm(151) : selectedAm(251);
+    hardModeOn ? selectedAm(251) : selectedAm(151);
     sortedPokemon = selectedPokemon.sort();
     createListItems();
     for (let i = 0; i < data.types.length; i++) {
@@ -247,7 +246,7 @@ const getInput = function (ev) {
             counter++;
           }
         case 7:
-          if (hardModeOn === true) {
+          if (hardModeOn) {
             pokemon.pokedexNumber <= 151
               ? createDiv("region", "kanto")
               : createDiv("region", "johto");
@@ -279,7 +278,7 @@ const getInput = function (ev) {
       inputName.value = "";
     }
   } else {
-    hardModeOn === true
+    hardModeOn
       ? alert(`Please write a valid pokemon name from Kanto and Johto combined`)
       : alert(`Please write a valid pokemon name
     from the original 150`);
