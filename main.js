@@ -1,5 +1,24 @@
 "use strict";
 
+/*collecting items for manipulation from Dom*/
+const checkBtn = document.getElementById("check");
+const questionMark = document.getElementById("questionMark");
+const inputName = document.getElementById("nameInput");
+const infoSide = document.querySelector(".infoSide");
+const highScoreEl = document.querySelector(".highScore");
+const scoreEl = document.querySelector(".score");
+const bodyBackground = document.querySelector(".backgroundPopup");
+const popup = document.querySelector(".popUpWindow");
+const resetBtn = document.querySelector(".resetBtn");
+const infoBtn = document.getElementById("informationButton");
+const infoCont = document.querySelector(".pokemonInfo");
+const closeBtn = document.getElementById("closeBtn");
+const list = document.getElementById("pokemonList");
+const hardBtn = document.getElementById("hardBtn");
+const normalBtn = document.getElementById("normalBtn");
+const load = document.querySelector(".loadPage");
+const metaViewport = document.querySelector("meta[name=viewport]");
+
 /*storing data recieved from api in data*/
 let data;
 /*generates a random number based on range given*/
@@ -19,25 +38,6 @@ let selectedPokemon = [];
 /*viewport adjustment for keyboard issue on andoid*/
 let initialHeight = window.innerHeight;
 let initialWidth = window.innerWidth;
-
-/*collecting items for manipulation from Dom*/
-const checkBtn = document.getElementById("check");
-const questionMark = document.getElementById("questionMark");
-const inputName = document.getElementById("nameInput");
-const infoSide = document.querySelector(".infoSide");
-const highScoreEl = document.querySelector(".highScore");
-const scoreEl = document.querySelector(".score");
-const bodyBackground = document.querySelector(".backgroundPopup");
-const popup = document.querySelector(".popUpWindow");
-const resetBtn = document.querySelector(".resetBtn");
-const infoBtn = document.getElementById("informationButton");
-const infoCont = document.querySelector(".pokemonInfo");
-const closeBtn = document.getElementById("closeBtn");
-const list = document.getElementById("pokemonList");
-const hardBtn = document.getElementById("hardBtn");
-const normalBtn = document.getElementById("normalBtn");
-const load = document.querySelector(".loadPage");
-const metaViewport = document.querySelector("meta[name=viewport]");
 
 /*creating empty object to fill with data from api*/
 let pokemon = {
@@ -73,32 +73,28 @@ const startState = function () {
 };
 
 /*collecting data to store into pokemon object*/
-const getPokemon = function () {
-	axios
-		.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-		.then(response => {
-			data = response.data;
-		})
-		.catch(err => console.log("whoops something didn't work"));
+const getPokemon = async function () {
+	try {
+		const response = await axios.get(
+			`https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+		);
+		data = response.data;
+	} catch (err) {
+		console.log("whoops something didn't work");
+	}
 };
 
 /*retrieving data from api to push into 
 allPokemonNames array*/
-const getAllPokemon = function () {
-	axios
-		.get(`https://pokeapi.co/api/v2/pokemon?limit=251`)
-		.then(response => {
-			return response.data;
-		})
-		.then(r => {
-			return r.results;
-		})
-		.then(a => {
-			for (let obj in a) {
-				allPokemonNames.push(a[obj].name);
-			}
-		})
-		.catch(err => console.log("whoops something didn't work"));
+const getAllPokemon = async function () {
+	try {
+		const response = await axios.get(
+			`https://pokeapi.co/api/v2/pokemon?limit=251`
+		);
+		response.data.results.forEach(obj => allPokemonNames.push(obj.name));
+	} catch (err) {
+		console.error(`Unable to find resource ${err}`);
+	}
 };
 
 /*hard mode function*/
@@ -135,6 +131,7 @@ const loadPage = function () {
 		load.classList.toggle("hide");
 	}, 2000);
 };
+
 /*creating list items to add to unordered list dynamically*/
 const createListItems = function () {
 	if (hardModeOn) {
@@ -278,7 +275,7 @@ const getInput = function (ev) {
 					createDiv("starts with", pokemon.name.charAt(0));
 			}
 			counter++;
-			score -= 1;
+			score--;
 			scoreEl.lastElementChild.innerText = score;
 			inputName.value = "";
 		}
