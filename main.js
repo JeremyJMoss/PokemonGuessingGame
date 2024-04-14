@@ -38,20 +38,26 @@ let initialWidth = window.innerWidth;
 let pokemon = {
 };
 
-const reset = function () {
+const reset = function (isSoftReset = false) {
 	document.querySelector(".pokemonImage")?.remove();
 	const pokemonId = hardModeOn ? getRandomNumber(251) : getRandomNumber(150);
 	counter = 1;
 	list.innerHTML = "";
 	getPokemon(pokemonId)
 	.then((response) => {
-		getInfo(response);
+		getPokemonInfo(response);
 	})
 	.catch(err => {
 		console.log(err);
 	});
-	highscore = 0;
+	if (!isSoftReset) {
+		highscore = 0;
+	} else {
+		highscore = highscore < score ? score : highscore; 
+	}
+	score = hardModeOn ? 40 : 20;
 	scoreEl.lastElementChild.innerText = score;
+	highScoreEl.lastElementChild.innerText = highscore;
 	bodyBackground.style.display = "none";
 	popup.style.display = "none";
 	inputName.value = "";
@@ -62,27 +68,13 @@ const reset = function () {
 const startState = function () {
 	getAllPokemon()
 	.then(() => {
-		const pokemonId = hardModeOn ? getRandomNumber(251) : getRandomNumber(150);
-		counter = 1;
-		getPokemon(pokemonId)
-		.then((response) => {
-			getInfo(response);
-		})
-		.catch(err => {
-			console.log(err);
-		});
-		score = hardModeOn ? 40 : 20;
-		scoreEl.lastElementChild.innerText = score;
-		bodyBackground.style.display = "none";
-		popup.style.display = "none";
-		inputName.value = "";
-		infoSide.innerHTML = "";
+		reset();
 	})
 	.catch(err => {
 		console.log(err);
 	})
 	checkBtn.addEventListener("click", getInput);
-	resetBtn.addEventListener("click", startState);
+	resetBtn.addEventListener("click", () => {reset(true)});
 	infoBtn.addEventListener("click", () => (infoCont.style.display = "block"));
 	closeBtn.addEventListener("click", () => (infoCont.style.display = "none"));
 	hardBtn.addEventListener("click", modeSelect);
@@ -193,7 +185,6 @@ const getInput = function (ev) {
 			createImg();
 			bodyBackground.style.display = "block";
 			popup.style.display = "flex";
-			checkBtn.removeEventListener("click", getInput);
 		} else {
 			switch (counter) {
 				case 1:
@@ -259,6 +250,7 @@ const getInput = function (ev) {
 					break;
 				case 12:
 					createDiv("starts with", pokemon.name.charAt(0));
+					break;
 			}
 			counter++;
 			score--;
@@ -270,10 +262,7 @@ const getInput = function (ev) {
 	}
 };
 
-
-
 startState();
-
 
 /*adjusting for mobile view resize for landscape and input field where keyboard comes in and ruins your day*/
 window.onresize = function () {
